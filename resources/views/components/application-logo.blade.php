@@ -1,0 +1,1 @@
+<img src="{{asset('Storage/images/logo-transparent.png')}}" height="200" width="200" alt="Website Logo">
