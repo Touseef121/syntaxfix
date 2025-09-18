@@ -1,1 +1,1 @@
-<img src="{{asset('Storage/images/logo-transparent.png')}}" height="200" width="200" alt="Website Logo">
+<img src="{{asset('storage/images/logo.png')}}" class="w-48 h-auto" alt="Website Logo">
