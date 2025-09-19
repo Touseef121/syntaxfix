@@ -1,1 +1,1 @@
-<img src="{{asset('storage/images/logo.png')}}" class="w-48 h-auto" alt="Website Logo">
+<img src="{{asset('storage/images/logo.png')}}" class="w-28 h-auto" alt="Website Logo">
