@@ -19,7 +19,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('storage/images/favicon-32x32.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('images/favicon-32x32.png') }}" type="image/png">
 
     <!-- CSS & JS via Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
