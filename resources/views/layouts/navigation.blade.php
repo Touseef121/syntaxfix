@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 sticky top-0 z-50 overflow-x-hidden w-full">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
 
@@ -67,11 +67,6 @@
 
 
                     <x-slot name="content">
-                        <h3 class="text-themecolor text-md ml-2 my-1 font-bold">{{ Auth::user()->name }}</h3>
-                        <h3 class="text-themecolor text-sm ml-2 my-1 font-bold">{{ Auth::user()->email }}</h3>
-
-                        <hr class="bg-gray-200 my-2">
-
                         <x-dropdown-link :href="route('profile.edit')" class="flex items-center gap-x-3">
                             <!-- SVG Icon -->
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
