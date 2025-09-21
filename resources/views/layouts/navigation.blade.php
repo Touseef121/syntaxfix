@@ -1,32 +1,40 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 sticky top-0 z-50 overflow-x-hidden w-full">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex h-16 items-center">
+        <div class="flex justify-between h-16 items-center">
 
             <!-- 1️⃣ Left: Logo -->
-            <div class="flex-shrink-0">
+            <div class="flex-shrink-0 flex items-center">
                 <a href="{{ route('home') }}">
-                    <x-application-logo class="block h-8 w-auto fill-current text-gray-800" />
+                    <x-application-logo class="h-8 w-auto max-w-full" />
                 </a>
             </div>
 
             <!-- 2️⃣ Center: Navigation Links -->
-            <div class="flex-1 flex justify-center space-x-8">
-                <x-search-bar>
-
-                </x-search-bar>
+            <div class="hidden sm:flex flex-1 justify-center px-2 max-w-xs w-full">
+                <x-search-bar />
             </div>
 
             <!-- 3️⃣ Right: Login / Sign Up Buttons -->
-            @guest
-            <div class="flex items-center space-x-3">
+            <div class="hidden sm:flex items-center space-x-3">
+                @guest
                 <a href="{{ route('login') }}" class="text-white bg-themecolor px-3 py-1 rounded-md border border-transparent hover:border-themecolor hover:ring-1 hover:ring-themecolor hover:bg-white hover:text-themecolor transition">
                     {{ __('Log In') }}
                 </a>
                 <a href="{{ route('register') }}" class="px-3 py-1 rounded-md border border-themecolor ring-1 ring-themecolor bg-white text-themecolor hover:text-white hover:bg-themecolor hover:ring-0 transition">
                     {{ __('Sign Up') }}
                 </a>
+                @endguest
             </div>
-            @endguest
+
+            {{-- hamburger --}}
+            <div class="flex sm:hidden flex-shrink-0">
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition">
+                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
             <!-- Settings Dropdown -->
             @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -48,7 +56,7 @@
                 </button>
 
                 {{-- Profile Icon --}}
-                <x-dropdown align="right" width="48">
+                <x-dropdown align="right" width="56">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500  bg-white  hover:text-gray-700  focus:outline-none transition ease-in-out duration-150">
                             <span data-slot="avatar" class="relative flex size-8 shrink-0 overflow-hidden rounded-full h-8 w-8">
@@ -59,8 +67,8 @@
 
 
                     <x-slot name="content">
-                        <h3 class="text-themecolor text-md ml-2 my-1 font-bold">Touseef Akram</h3>
-                        <h3 class="text-themecolor text-sm ml-2 my-1 font-bold">touseef@gmail.com</h3>
+                        <h3 class="text-themecolor text-md ml-2 my-1 font-bold">{{ Auth::user()->name }}</h3>
+                        <h3 class="text-themecolor text-sm ml-2 my-1 font-bold">{{ Auth::user()->email }}</h3>
 
                         <hr class="bg-gray-200 my-2">
 
@@ -106,58 +114,55 @@
             </div>
             @endauth
         </div>
-
-        <!-- Hamburger -->
-        <div class="-me-2 flex items-center sm:hidden">
-            <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400  hover:text-gray-500  hover:bg-gray-100  focus:outline-none focus:bg-gray-100  focus:text-gray-500  transition duration-150 ease-in-out">
-                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                    <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-    </div>
     </div>
 
     <!-- Responsive Navigation Menu -->
-
+    <!-- ✅ Mobile Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="space-x-3 mb-3 flex justify-center">
-            <a href="{{ route('login') }}" class="text-white bg-themecolor px-2 py-1 rounded-md border border-transparent hover:border-themecolor hover:ring-1 hover:ring-themecolor hover:bg-white hover:text-themecolor">
-                Log In
-            </a>
-            <a href="{{ route('login') }}" class="px-2 py-1 rounded-md border border-transparent border-themecolor ring-1 ring-themecolor bg-white text-themecolor hover:text-white hover:bg-themecolor">
-                Sign Up
-            </a>
-        </div>
+        <div class="px-4 pt-4 pb-3 space-y-4">
 
-        <div class="sm:flex sm:items-center sm:ms-6">
-        </div>
-
-        @auth
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800 ">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+            <!-- 🔍 Search on mobile -->
+            <div class="w-full max-w-full overflow-hidden">
+                <x-search-bar />
             </div>
 
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+            <!-- 🔑 Guest Links -->
+            @guest
+            <div class="space-y-2">
+                <a href="{{ route('login') }}" class="block w-full text-center text-white bg-themecolor px-3 py-2 rounded-md border border-transparent hover:border-themecolor hover:ring-1 hover:ring-themecolor hover:bg-white hover:text-themecolor transition">
+                    {{ __('Log In') }}
+                </a>
+                <a href="{{ route('register') }}" class="block w-full text-center px-3 py-2 rounded-md border border-themecolor ring-1 ring-themecolor bg-white text-themecolor hover:text-white hover:bg-themecolor hover:ring-0 transition">
+                    {{ __('Sign Up') }}
+                </a>
+            </div>
+            @endguest
 
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+            <!-- 👤 Authenticated User -->
+            @auth
+            <div class="pt-4 border-t border-gray-200">
+                <div class="px-2">
+                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                </div>
 
-                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                <div class="mt-3 space-y-2">
+                    <x-responsive-nav-link :href="route('profile.edit')">
+                        {{ __('Profile') }}
                     </x-responsive-nav-link>
-                </form>
+
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                            {{ __('Log Out') }}
+                        </x-responsive-nav-link>
+                    </form>
+                </div>
             </div>
+            @endauth
         </div>
-        @endauth
     </div>
+
+
 </nav>

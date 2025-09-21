@@ -7,11 +7,7 @@
 
     <!-- Dynamic Page Title -->
     <title>
-        @if(isset($title))
-            {{ $title }} - {{ config('app.name', 'Laravel') }}
-        @else
-            @yield('title', config('app.name', 'Laravel'))
-        @endif
+        {{ config('app.name', 'SyntaxFix') }} | @yield('title')
     </title>
 
     <!-- Fonts -->
@@ -27,31 +23,35 @@
     <!-- Livewire Styles -->
     @livewireStyles
 </head>
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+<body class="font-sans antialiased overflow-x-hidden w-full">
+    <div class="bg-gray-100">
 
         <!-- Breeze Navigation -->
-        @include('layouts.navigation')
+        <header class="sticky top-0 z-50 bg-white">
+            @include('layouts.navigation')
+        </header>
 
         <!-- Page Header -->
         @isset($header)
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
         @endisset
 
-        <!-- Page Content -->
-        <main>
-            {{-- Component style --}}
-            @isset($slot)
-                {{ $slot }}
-            @endisset
+        <div class="flex">
+            {{-- Sidebar --}}
+            <div class="hidden md:block fixed top-16 left-0 h-screen w-64 bg-white shadow-md">
+                @include('layouts.partials.sidebar')
+            </div>
 
-            {{-- Classic Blade style --}}
-            @yield('content')
-        </main>
+            {{-- Main Content --}}
+            <main class="flex-1 md:ml-64 p-6">
+                @yield('content')
+            </main>
+        </div>
+
     </div>
 
     <!-- Livewire Scripts -->

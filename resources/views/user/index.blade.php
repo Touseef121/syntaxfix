@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'New User Page')
+@section('title', 'Home')
 
 @section('content')
-        hi
+        @livewire('user.index')
 @endsection
