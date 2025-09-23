@@ -6,6 +6,7 @@ use App\Models\Forum;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\ForumAttachment;
+use App\Models\Subcategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
@@ -122,10 +123,12 @@ class Create extends Component
 
     public function render()
     {
+        $categories = Category::all()->toArray();
+        $subCategories = Subcategory::all()->toArray();
 
         return view('livewire.forum.create', [
-            'categories' => \App\Models\Category::all()->toArray(),
-            'subCategories' => \App\Models\SubCategory::all()->toArray(),
+            'categories' => $categories,
+            'subCategories' => $subCategories,
         ]);
     }
 }
