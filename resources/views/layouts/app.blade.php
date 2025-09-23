@@ -44,16 +44,19 @@
             {{-- Sidebar --}}
             @hasSection('sidebar')
             @yield('sidebar')
+            <main class="flex-1 p-6">
+                @yield('content')
+            </main>
             @else
             <div class="hidden md:block fixed top-16 left-0 h-screen w-64 bg-white shadow-md">
                 @include('layouts.partials.sidebar')
             </div>
-            @endif
-
-            {{-- Main Content --}}
             <main class="flex-1 md:ml-64 p-6">
                 @yield('content')
             </main>
+            @endif
+
+            {{-- Main Content --}}
         </div>
 
     </div>
