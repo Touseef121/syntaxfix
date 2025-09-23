@@ -5,9 +5,9 @@
             <h1 class="text-2xl font-bold text-themecolor">Latest Discussions</h1>
             @auth
             @if(Auth::user()->role === 'user' || Auth::user()->role === 'admin')
-            <button class="flex items-center gap-2 bg-themecolor hover:bg-secondarycolor text-white px-4 py-2 rounded-lg font-medium w-full sm:w-auto justify-center">
+            <a href="{{route('forum.create')}}" class="flex items-center gap-2 bg-themecolor hover:bg-secondarycolor text-white px-4 py-2 rounded-lg font-medium w-full sm:w-auto justify-center">
                 + New Discussion
-            </button>
+            </a>
             @endif
             @endauth
         </div>
@@ -18,13 +18,14 @@
             <!-- Discussions Column -->
             <div class="lg:col-span-2 space-y-4">
                 <!-- Discussion Card 1 -->
+                @foreach ($forums as $data)
                 <div class="bg-white shadow rounded-xl p-5">
                     <a href="">
                         <h2 class="font-bold text-xl text-gray-900">
-                            Welcome to our new forum! Let's discuss the best asdasjhdaskdakljsdklas...
+                            {{$data->title}}
                         </h2>
                         <p class="text-gray-600 mt-2 text-sm">
-                            I'm excited to start this community and would love to hear your thoughts...
+                            {{ $data->description }}
                         </p>
                     </a>
 
@@ -32,7 +33,7 @@
                         <div class="flex items-center gap-2">
                             <img src="https://i.pravatar.cc/40?img=1" class="w-6 h-6 rounded-full">
                             <div>
-                                <p class="font-semibold text-gray-800">admin @ <span class="text-xs text-gray-500"> 5 mins ago</span></p>
+                                <p class="font-semibold text-gray-800">{{$data->user->name}} @ <span class="text-xs text-gray-500"> {{ $data->created_at->diffForHumans() }}</span></p>
                             </div>
                         </div>
                         <div class="flex items-center gap-4">
@@ -41,6 +42,7 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
 
             <!-- Right Sidebar -->

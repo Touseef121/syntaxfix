@@ -3,5 +3,5 @@
 @section('title', 'Home')
 
 @section('content')
-        @livewire('user.index')
+        @livewire('forum.index')
 @endsection

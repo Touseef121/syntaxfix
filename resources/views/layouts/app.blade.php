@@ -13,14 +13,14 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/favicon-32x32.png') }}" type="image/png">
 
     <!-- CSS & JS via Vite -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+    
     <!-- Livewire Styles -->
+    @stack('assets')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
 <body class="font-sans antialiased overflow-x-hidden w-full">
@@ -42,9 +42,13 @@
 
         <div class="flex">
             {{-- Sidebar --}}
+            @hasSection('sidebar')
+            @yield('sidebar')
+            @else
             <div class="hidden md:block fixed top-16 left-0 h-screen w-64 bg-white shadow-md">
                 @include('layouts.partials.sidebar')
             </div>
+            @endif
 
             {{-- Main Content --}}
             <main class="flex-1 md:ml-64 p-6">

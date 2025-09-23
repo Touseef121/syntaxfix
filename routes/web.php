@@ -4,8 +4,15 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('user.index');
+    return view('forum.index');
 })->name('home');
+
+Route::prefix('forum')->name('forum.')->group(function () {
+    Route::get('/create', function () {
+        return view('forum.create');
+    })->name('create');
+});
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
