@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'last_activity'
     ];
 
     /**
@@ -43,5 +44,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function forums()
+    {
+        return $this->hasMany(Forum::class);
     }
 }

@@ -84,12 +84,11 @@ class Create extends Component
     {
         $this->validate();
 
-
         $forum = Forum::create([
             'user_id'          => Auth::user()->id,
             'title'          => $this->forum['title'],
             'category_id'    => $this->forum['category'],
-            'sub_category_id' => $this->forum['subCategory'],
+            'subcategory_id' => $this->forum['subCategory'],
             'description'    => $this->forum['description'],
         ]);
 

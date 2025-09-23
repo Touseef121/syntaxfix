@@ -14,4 +14,9 @@ class Category extends Model
     {
         return $this->hasMany(Subcategory::class);
     }
+
+    public function forums()
+    {
+        return $this->hasMany(Forum::class);
+    }
 }

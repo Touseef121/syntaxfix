@@ -9,7 +9,7 @@ class Forum extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['user_id', 'subcategory_id', 'title', 'description'];
+    protected $fillable = ['user_id', 'category_id', 'subcategory_id', 'title', 'description'];
 
     public function user() {
         return $this->belongsTo(User::class);

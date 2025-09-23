@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ForumLike extends Model
 {
-    //
+    protected $guarded = [];
 }
