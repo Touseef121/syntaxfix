@@ -26,6 +26,7 @@
         </nav>
 
         <!-- Quick Stats -->
+        @if(Auth::user())
         <div class="mt-8">
             <h2 class="text-lg font-semibold text-gray-800 mb-2">Quick Stats</h2>
             <div class="space-y-1 text-gray-700 text-sm">
@@ -43,6 +44,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
     </aside>
 </div>

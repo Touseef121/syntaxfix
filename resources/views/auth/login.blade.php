@@ -1,4 +1,8 @@
 <x-guest-layout>
+        <div class="flex justify-center my-3">
+        <a href="{{route('home')}}">
+            <x-application-logo /></a>
+    </div>
     <div data-slot="card-header" class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-6 pb-8 relative z-10">
         <div class="text-center space-y-1">
             

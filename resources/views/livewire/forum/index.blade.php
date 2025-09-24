@@ -18,7 +18,7 @@
             <!-- Discussions Column -->
             <div class="lg:col-span-2 space-y-4">
                 <!-- Discussion Card 1 -->
-                @foreach ($forums as $data)
+                @forelse ($forums as $data)
                 <div class="bg-white shadow rounded-xl p-5">
                     <a href="">
                         <h2 class="font-bold text-xl text-gray-900">{{ $data->title }}</h2>
@@ -40,6 +40,7 @@
                         <div class="flex items-center gap-4">
 
                             {{-- Like Button --}}
+                            @if(Auth::user())
                             <div class="flex items-center gap-1 cursor-pointer select-none" wire:click="toggleLike({{ $data->id }})">
                                 @php
                                 $liked = $data->likes->contains('user_id', auth()->id());
@@ -59,13 +60,16 @@
 
                                 <span class="text-gray-700 font-medium">{{ $data->likes->count() }}</span>
                             </div>
+                            @endif
 
                             {{-- Comment Count --}}
                             <span class="flex items-center gap-1">💬 23</span>
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @empty
+                <div class="text-center">No Forums Available!</div>
+                @endforelse
 
             </div>
 
@@ -87,6 +91,7 @@
                     </ol>
                 </div>
 
+                @if(Auth::user())
                 <div class="bg-white shadow rounded-xl p-5">
                     <h2 class="font-bold text-gray-800 mb-4">👥 Most Active Users</h2>
                     <ul class="space-y-2 text-sm text-gray-700">
@@ -101,22 +106,23 @@
                         @endforeach
                     </ul>
                 </div>
+                @endif
 
                 <div class="bg-white shadow rounded-xl p-5">
                     <h2 class="font-bold text-gray-800 mb-4">❤️ Most Liked Posts</h2>
                     <ul class="space-y-2 text-sm text-gray-700">
                         @foreach($mostLikedPosts as $index => $forum)
+                        @if($forum->likes_count > 0)
                         <li class="flex justify-between">
                             <span class="flex items-center gap-2">
                                 <span class="text-red-600 font-bold">{{ $index + 1 }}.</span>
-                                <a 
-                                {{-- href="{{ route('forum.show', $forum->id) }}"  --}}
-                                class="hover:underline cursor-pointer" title="{{ $forum->title }}">
+                                <a {{-- href="{{ route('forum.show', $forum->id) }}" --}} class="hover:underline cursor-pointer" title="{{ $forum->title }}">
                                     {{ \Illuminate\Support\Str::limit($forum->title, 15) }}
                                 </a>
                             </span>
                             <span class="text-gray-500">{{ $forum->likes_count }} likes</span>
                         </li>
+                        @endif
                         @endforeach
                     </ul>
                 </div>
