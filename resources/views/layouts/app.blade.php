@@ -24,7 +24,7 @@
     @livewireStyles
 </head>
 <body class="font-sans antialiased overflow-x-hidden w-full">
-    <div class="bg-gray-100">
+    <div class="min-h-screen bg-gray-100">
 
         <!-- Breeze Navigation -->
         <header class="sticky top-0 z-50 bg-white">
