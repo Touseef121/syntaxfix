@@ -50,4 +50,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(Forum::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function activities()
+    {
+        return $this->hasMany(UserActivity::class);
+    }
+
+    public function likedForums()
+    {
+        return $this->belongsToMany(Forum::class, 'forum_likes')->withTimestamps();
+    }
+
+    public function savedForums()
+    {
+        return $this->belongsToMany(Forum::class, 'saved_forums')->withTimestamps();
+    }
 }

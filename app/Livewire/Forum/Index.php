@@ -7,6 +7,7 @@ use App\Models\Forum;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\ForumLike;
+use App\Models\UserActivity;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
@@ -58,6 +59,29 @@ class Index extends Component
             ->orderByDesc('likes_count')
             ->take(5)
             ->get();
+    }
+
+    public function toggleSave($forumId)
+    {
+        $user = auth()->user();
+
+        if ($user->savedForums()->where('forum_id', $forumId)->exists()) {
+            $user->savedForums()->detach($forumId);
+
+            UserActivity::create([
+                'user_id' => $user->id,
+                'type' => 'forum_unsaved',
+                'description' => "Removed forum from saved list"
+            ]);
+        } else {
+            $user->savedForums()->attach($forumId);
+
+            UserActivity::create([
+                'user_id' => $user->id,
+                'type' => 'forum_saved',
+                'description' => "Saved a forum"
+            ]);
+        }
     }
 
 

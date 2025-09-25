@@ -17,7 +17,7 @@
     <link rel="icon" href="{{ asset('images/favicon-32x32.png') }}" type="image/png">
 
     <!-- CSS & JS via Vite -->
-    
+
     <!-- Livewire Styles -->
     @stack('assets')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -40,27 +40,34 @@
         </header>
         @endisset
 
-        <div class="flex">
+        <div class="flex flex-1 w-full">
             {{-- Sidebar --}}
             @hasSection('sidebar')
-            @yield('sidebar')
+            <aside class="w-64 flex-shrink-0">
+                @yield('sidebar')
+            </aside>
             <main class="flex-1 p-6">
                 @yield('content')
             </main>
             @else
-            <div class="hidden md:block fixed top-16 left-0 h-screen w-64 bg-white shadow-md">
+            {{-- Default Livewire Sidebar --}}
+            <aside class="hidden md:block w-64 flex-shrink-0">
                 @livewire('component.forum-category-sidebar')
-            </div>
-            <main class="flex-1 md:ml-64 p-6">
+            </aside>
+            <main class="flex-1 p-6">
                 @yield('content')
             </main>
             @endif
-
-            {{-- Main Content --}}
         </div>
 
-    </div>
+        <!-- Footer -->
+        <footer class="bg-white border-t border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                @include('components.footer')
+            </div>
+        </footer>
 
+    </div>
     <!-- Livewire Scripts -->
     @livewireScripts
 </body>

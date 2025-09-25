@@ -1,5 +1,5 @@
 <div>
-    <aside class="w-64 bg-white shadow-md h-screen p-6 overflow-auto">
+    <aside class="w-64 bg-white h-screen p-6 overflow-auto">
 
         <!-- Categories -->
         <h2 class="text-lg font-semibold text-gray-800 mb-4">Categories</h2>

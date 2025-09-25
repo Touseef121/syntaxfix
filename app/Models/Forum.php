@@ -8,26 +8,36 @@ use Illuminate\Database\Eloquent\Model;
 class Forum extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = ['user_id', 'category_id', 'subcategory_id', 'title', 'description'];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function subcategory() {
+    public function subcategory()
+    {
         return $this->belongsTo(Subcategory::class);
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class)->whereNull('parent_id');
     }
 
-    public function likes() {
+    public function likes()
+    {
         return $this->hasMany(ForumLike::class);
     }
 
-    public function attachments() {
+    public function attachments()
+    {
         return $this->hasMany(ForumAttachment::class);
+    }
+
+    public function savedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'saved_forums')->withTimestamps();
     }
 }
