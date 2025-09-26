@@ -7,7 +7,7 @@
 
     <!-- Dynamic Page Title -->
     <title>
-        {{ config('app.name', 'SyntaxFix') }} | @yield('title')
+        {{ config('app.name', 'SyntaxFix') }} - @yield('title')
     </title>
 
     <!-- Fonts -->
@@ -43,10 +43,8 @@
         <div class="flex flex-1 w-full">
             {{-- Sidebar --}}
             @hasSection('sidebar')
-            <aside class="w-64 flex-shrink-0">
-                @yield('sidebar')
-            </aside>
-            <main class="flex-1 p-6">
+            @yield('sidebar')
+            <main class="flex-1 m-3">
                 @yield('content')
             </main>
             @else

@@ -1,10 +1,9 @@
 <footer class="bg-white border-t border-gray-200 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="space-y-4">
-                <a href="{{route('home')}}"><img src="{{asset('images/logo.png')}}" height="150" width="150" alt=""></a>
-                <p class="text-gray-600 text-sm leading-relaxed">Building the best community for meaningful discussions,
-                    knowledge sharing, and professional growth.</p>
+                <a href="{{route('home')}}"><img src="{{asset('images/logo.png')}}" height="150" width="150" alt="SyntaxFix Logo"></a>
+                <p class="text-gray-600 text-sm leading-relaxed">SyntaxFix provides coding tutorials, bug fixes, and tech solutions for developers. Learn, fix, and improve your code.</p>
                 <div class="flex space-x-3"><button data-slot="button" class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent dark:hover:bg-accent/50 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 text-gray-500 hover:text-[#2563EB]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter w-4 h-4">
                             <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z">
                             </path>
@@ -47,7 +46,7 @@
         </div>
         <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
-                <p class="text-sm text-gray-600">© 2024 Forum Hub. All rights reserved.</p>
+                <p class="text-sm text-gray-600">© 2025 SyntaxFix. All rights reserved.</p>
                 <div class="flex space-x-4"><a href="/privacy" class="text-sm text-gray-600 hover:text-[#2563EB] transition-colors">Privacy Policy</a>
                     <a href="/terms" class="text-sm text-gray-600 hover:text-[#2563EB] transition-colors">
                         Terms of Service

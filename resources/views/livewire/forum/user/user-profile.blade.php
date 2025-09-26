@@ -3,7 +3,7 @@
         <div data-slot="card-content" class="px-6 pt-6">
             <div class="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-6">
                 <span data-slot="avatar" class="relative flex size-8 shrink-0 overflow-hidden rounded-full h-24 w-24">
-                    <img data-slot="avatar-image" class="aspect-square size-full" alt="johndoe" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/diverse-user-avatars-jNaliJbW5b5ccprrlYjj99XE0SOY9L.png">
+                    <img data-slot="avatar-image" class="aspect-square size-full" alt="SyntaxFix Logo" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/diverse-user-avatars-jNaliJbW5b5ccprrlYjj99XE0SOY9L.png">
                 </span>
                 <div class="flex-1">
                     <div class="flex items-center space-x-3 mb-2">
@@ -71,22 +71,29 @@
         </div>
     </div>
     <div class="flex flex-col gap-2">
-        <div class="bg-gray-100 text-muted-foreground h-9 items-center justify-center rounded-lg p-[3px] grid w-full grid-cols-4">
-            <button wire:click="setTab('posts')" class="{{ $activeTab==='posts' ? 'bg-white shadow-sm rounded-md py-[3px]' : '' }} ...">
+        <div class="bg-gray-200 rounded-lg p-1 grid grid-cols-2 sm:grid-cols-4 gap-1">
+            <button wire:click="setTab('posts')" class="text-sm sm:text-base py-2 px-2 rounded-md w-full text-center transition
+            {{ $activeTab === 'posts' ? 'bg-white shadow-sm text-[#1E3A8A] font-semibold' : 'text-gray-500 hover:bg-gray-100' }}">
                 Posts ({{ $posts->count() }})
             </button>
-            <button wire:click="setTab('replies')" class="{{ $activeTab==='replies' ? 'bg-white shadow-sm rounded-md py-[3px]' : '' }} ...">
+
+            <button wire:click="setTab('replies')" class="text-sm sm:text-base py-2 px-2 rounded-md w-full text-center transition
+            {{ $activeTab === 'replies' ? 'bg-white shadow-sm text-[#1E3A8A] font-semibold' : 'text-gray-500 hover:bg-gray-100' }}">
                 Replies ({{ $replies->count() }})
             </button>
-            <button wire:click="setTab('saved')" class="{{ $activeTab==='saved' ? 'bg-white shadow-sm' : '' }} ...">
+
+            <button wire:click="setTab('saved')" class="text-sm sm:text-base py-2 px-2 rounded-md w-full text-center transition
+            {{ $activeTab === 'saved' ? 'bg-white shadow-sm text-[#1E3A8A] font-semibold' : 'text-gray-500 hover:bg-gray-100' }}">
                 Saved ({{ $saved->count() }})
             </button>
-            <button wire:click="setTab('activity')" class="{{ $activeTab==='activity' ? 'bg-white shadow-sm rounded-md py-[3px]' : '' }} ...">
+
+            <button wire:click="setTab('activity')" class="text-sm sm:text-base py-2 px-2 rounded-md w-full text-center transition
+            {{ $activeTab === 'activity' ? 'bg-white shadow-sm text-[#1E3A8A] font-semibold' : 'text-gray-500 hover:bg-gray-100' }}">
                 Activity
             </button>
         </div>
 
-        <div class="flex-1 outline-none border p-3 mt-3 rounded-md shadow-lg">
+        <div class="flex-1 outline-none p-3 mt-3 rounded-md">
             <div class="mt-3 space-y-4">
                 {{-- Posts --}}
                 {{-- Posts --}}

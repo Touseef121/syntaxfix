@@ -27,7 +27,7 @@
 
                     <div class="flex justify-between items-center mt-4 text-gray-500 text-sm">
                         <div class="flex items-center gap-2">
-                            <img src="https://i.pravatar.cc/40?img=1" class="w-6 h-6 rounded-full">
+                            <img src="https://i.pravatar.cc/40?img=1" class="w-6 h-6 rounded-full" alt="SyntaxFix User Profile Picture">
                             <div>
                                 <p class="font-semibold text-gray-800">
                                     {{$data->user->name}}
@@ -37,40 +37,64 @@
                         </div>
 
                         {{-- Like & Comment Section --}}
-                        <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-4 text-sm sm:text-base">
 
-                            {{-- Like Button --}}
+                            {{-- ✅ Like Button --}}
                             @if(Auth::user())
-                            <div class="flex items-center gap-1 cursor-pointer select-none" wire:click="toggleLike({{ $data->id }})">
+                            <div class="flex items-center gap-1 cursor-pointer select-none transition hover:scale-110" wire:click="toggleLike({{ $data->id }})">
+
                                 @php
                                 $liked = $data->likes->contains('user_id', auth()->id());
                                 @endphp
 
                                 @if($liked)
                                 <!-- Filled Red Heart -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 fill-current" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
+                   2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09
+                   C13.09 3.81 14.76 3 16.5 3 
+                   19.58 3 22 5.42 22 8.5
+                   c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                                 </svg>
                                 @else
                                 <!-- Outline Heart -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 hover:text-red-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 
+                   2 8.5 2 5.42 4.42 3 7.5 3
+                   c1.74 0 3.41.81 4.5 2.09
+                   C13.09 3.81 14.76 3 16.5 3
+                   19.58 3 22 5.42 22 8.5
+                   c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                                 </svg>
                                 @endif
 
-                                <span class="text-gray-700 font-medium">{{ $data->likes->count() }}</span>
+                                <span class="font-medium text-gray-700">{{ $data->likes->count() }}</span>
                             </div>
-                            <button wire:click="toggleSave({{ $data->id }})" class="p-2 rounded-md transition {{ auth()->user()->savedForums->contains($data->id) ? 'text-yellow-400' : 'text-gray-500 hover:text-themecolor' }}">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="{{ auth()->user()->savedForums->contains($data->id) ? 'currentColor' : 'none' }}" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25  4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507  0 0 1 11.186 0Z" />
+                            {{-- ✅ Save Button with Count --}}
+                            <div class="flex items-center gap-1 cursor-pointer transition hover:scale-110" wire:click="toggleSave({{ $data->id }})">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 drop-shadow-sm
+                {{ auth()->user()->savedForums->contains($data->id) ? 'text-yellow-400' : 'text-gray-400 hover:text-yellow-400' }}" fill="{{ auth()->user()->savedForums->contains($data->id) ? 'currentColor' : 'none' }}" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 
+                   1.907 2.185V21L12 17.25 4.5 21V5.507
+                   c0-1.108.806-2.057 1.907-2.185
+                   a48.507 48.507 0 0 1 11.186 0Z" />
                                 </svg>
-                            </button>
+
+                                <span class="font-medium text-gray-700">
+                                    {{ $data->savedByUsers->count() ?? 0 }}
+                                </span>
+                            </div>
                             @endif
 
-                            {{-- Comment Count --}}
-                            <span class="flex items-center gap-1">💬 23</span>
+                            {{-- ✅ Comment Count --}}
+                            <div class="flex items-center gap-1 text-gray-600">
+                                <span>💬</span>
+                                <span class="font-medium">{{ $data->comments->count() ?? 0 }}</span>
+                            </div>
                         </div>
+
                     </div>
                 </div>
                 @empty
