@@ -49,24 +49,29 @@
             </main>
             @else
             {{-- Default Livewire Sidebar --}}
-            <aside class="hidden md:block w-64 flex-shrink-0">
-                @livewire('component.forum-category-sidebar')
-            </aside>
-            <main class="flex-1 p-6">
-                @yield('content')
-            </main>
+            <div class="flex w-full">
+                <aside class="hidden md:block w-64 flex-shrink-0 h-[calc(100vh-64px)] p-6 sticky top-16 bg-white overflow-auto">
+                    @livewire('component.forum-category-sidebar')
+                </aside>
+
+                <main class="flex-1 p-6">
+                    @yield('content')
+                </main>
+            </div>
+
             @endif
         </div>
 
         <!-- Footer -->
         <footer class="bg-white border-t border-gray-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
                 @include('components.footer')
             </div>
         </footer>
 
     </div>
     <!-- Livewire Scripts -->
+    @livewire('toast')
     @livewireScripts
 </body>
 </html>

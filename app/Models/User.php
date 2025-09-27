@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -20,7 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'last_activity'
+        'last_activity',
+        'location',
+        'website',
+        'bio'
     ];
 
     /**
@@ -69,5 +74,17 @@ class User extends Authenticatable
     public function savedForums()
     {
         return $this->belongsToMany(Forum::class, 'saved_forums')->withTimestamps();
+    }
+
+        // One latest profile picture
+    public function profilePicture(): HasOne
+    {
+        return $this->hasOne(UserProfilePicture::class)->latestOfMany();
+    }
+
+    // If you want to keep history of all pictures
+    public function profilePictures(): HasMany
+    {
+        return $this->hasMany(UserProfilePicture::class);
     }
 }

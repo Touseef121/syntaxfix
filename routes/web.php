@@ -14,9 +14,15 @@ Route::middleware(['activity'])->group(function () {
         // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         Route::prefix('user')->name('user.')->group(function () {
+
             Route::get('/profile/{id}', function ($id) {
                 return view('forum.user.user-profile', compact('id'));
             })->name('profile');
+
+            Route::get('/user-setting/{id}', function ($id) {
+                return view('forum.user.user-setting', compact('id'));
+            })->name('setting');
+
         });
 
         Route::prefix('forum')->name('forum.')->group(function () {

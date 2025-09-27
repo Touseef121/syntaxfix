@@ -5,11 +5,12 @@ namespace App\Livewire\Forum;
 use App\Models\Forum;
 use Livewire\Component;
 use App\Models\Category;
-use App\Models\ForumAttachment;
 use App\Models\Subcategory;
+use App\Models\UserActivity;
+use Livewire\WithFileUploads;
+use App\Models\ForumAttachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Livewire\WithFileUploads;
 
 class Create extends Component
 {
@@ -113,6 +114,13 @@ class Create extends Component
                 ]);
             }
         }
+
+        UserActivity::create([
+            'user_id' => Auth::user()->id,
+            'forum_id' => $forum->id,
+            'type' => 'forum_created',
+            'description' => "Posted a Forum"
+        ]);
 
         session()->flash('success', 'Your discussion has been created successfully!');
 

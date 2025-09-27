@@ -59,9 +59,17 @@
                 <x-dropdown align="right" width="56">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500  bg-white  hover:text-gray-700  focus:outline-none transition ease-in-out duration-150">
+                            @php
+                            $profilePic = \App\Models\UserProfilePicture::where('user_id', Auth::id())
+                            ->whereNull('deleted_at') // if you’re using soft delete
+                            ->latest()
+                            ->first();
+                            @endphp
+
                             <span data-slot="avatar" class="relative flex size-8 shrink-0 overflow-hidden rounded-full h-8 w-8">
-                                <img data-slot="avatar-image" class="aspect-square size-full" alt="johndoe" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/diverse-user-avatars-jNaliJbW5b5ccprrlYjj99XE0SOY9L.png">
+                                <img data-slot="avatar-image" class="aspect-square size-full object-cover" alt="{{ Auth::user()->name }}" src="{{ $profilePic ? asset('storage/' . $profilePic->file_path) : asset('images/default-image.png') }}">
                             </span>
+                            
                         </button>
                     </x-slot>
 

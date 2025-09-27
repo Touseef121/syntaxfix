@@ -12,4 +12,9 @@ class UserActivity extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function forum()
+    {
+        return $this->belongsTo(Forum::class);
+    }
 }

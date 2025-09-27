@@ -70,14 +70,16 @@ class Index extends Component
 
             UserActivity::create([
                 'user_id' => $user->id,
+                'forum_id' => $forumId,
                 'type' => 'forum_unsaved',
                 'description' => "Removed forum from saved list"
             ]);
         } else {
             $user->savedForums()->attach($forumId);
-
+            
             UserActivity::create([
                 'user_id' => $user->id,
+                'forum_id' => $forumId,
                 'type' => 'forum_saved',
                 'description' => "Saved a forum"
             ]);
@@ -95,11 +97,27 @@ class Index extends Component
 
         if ($like) {
             $like->delete();
+
+             UserActivity::create([
+                'user_id' => Auth::user()->id,
+                'forum_id' => $forumId,
+                'type' => 'unliked_forum',
+                'description' => "Unliked A Forum"
+            ]);
+            
         } else {
+
             ForumLike::create([
                 'forum_id' => $forumId,
                 'user_id' => Auth::user()->id,
             ]);
+
+            UserActivity::create([
+               'user_id' => Auth::user()->id,
+               'forum_id' => $forumId,
+               'type' => 'like_forum',
+               'description' => "Liked A Forum"
+           ]);
         }
 
         $this->loadData(); // Reload forums + stats to reflect like counts
